@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tugaslat;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class DataPelanggan extends JFrame implements ActionListener{
+public class DataPelanggan extends JFrame implements ActionListener {
     public JButton btnSimpan;
     private JTextField namaField, telpField, hariField;
     private JRadioButton[] kendaraanOptions;
@@ -38,11 +34,20 @@ public class DataPelanggan extends JFrame implements ActionListener{
         kendaraanGroup = new ButtonGroup();
         JPanel kendaraanPanel = new JPanel(new GridLayout(3, 1));
 
+        // Sesuaikan nama kendaraan berdasarkan jenis kendaraan
+        String[] kendaraanNama;
+        if (jenis.equals("Mobil")) {
+            kendaraanNama = new String[]{"Avanza", "Ertiga", "Pajero"};
+        } else {
+            kendaraanNama = new String[]{"Beat", "Vario", "NMax"};
+        }
+
         for (int i = 0; i < kendaraanOptions.length; i++) {
-            kendaraanOptions[i] = new JRadioButton(jenis + " " + (char)('A' + i) + " - Rp " + harga[i]);
+            kendaraanOptions[i] = new JRadioButton(kendaraanNama[i] + " - Rp " + harga[i]);
             kendaraanGroup.add(kendaraanOptions[i]);
             kendaraanPanel.add(kendaraanOptions[i]);
         }
+
         add(kendaraanPanel);
 
         btnSimpan = new JButton("Simpan");
@@ -88,7 +93,7 @@ public class DataPelanggan extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == btnSimpan){
+        if (e.getSource() == btnSimpan) {
             simpanData();
         }
     }
